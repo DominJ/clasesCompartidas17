@@ -7,13 +7,15 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-//Aquesta classe simplement li passes un HashMap<Integer,<ArrayList<Integer>>> i et reescriu el document de relacions
+//Aquesta classe simplement li passes un HashMap<Integer,<ArrayList<Integer>>> i et reescriu el document
 
 public class EscribirFichero {
 	
-	public static void ReescribirFichero(HashMap<Integer,ArrayList<Integer>> n){
+	//a == 1 és un fitxer on la primera en ordre és la clau i la segona les relacionades amb ella
+	//i si a == 0 és la inversa
+	public static void ReescribirFichero(HashMap<Integer,ArrayList<Integer>> n, Integer l){
 		try{
-			FileWriter fw = new FileWriter("/Users/USUARIO/Downloads/PROP/DBLP_four_area/prova.txt",false);
+			FileWriter fw = new FileWriter("/Users/USUARIO/Downloads/PROP/DBLP_four_area/prova1.txt",false);
 		    Iterator<Entry<Integer, ArrayList<Integer>>> it = n.entrySet().iterator();
 		    while (it.hasNext()) {
 				Map.Entry<Integer, ArrayList<Integer>> e = it.next();
@@ -21,7 +23,8 @@ public class EscribirFichero {
 				int a = e.getKey();
 				b = e.getValue();
 				for (int j = 0; j < b.size(); j++){
-					fw.write(a + "\t"+ b.get(j) + "\r\n");
+					if(l == 1) fw.write(a + "\t"+ b.get(j) + "\r\n");
+					else fw.write(b.get(j) + "\t"+ a + "\r\n");
 				}
 			}
 			fw.close();
@@ -29,7 +32,7 @@ public class EscribirFichero {
 			System.out.println("Error de:"+e);
 		}
 	}
-
+	
 	
 	public static void main(String[] args){
 		HashMap<Integer,ArrayList<Integer>> n = new HashMap<Integer,ArrayList<Integer>>();
@@ -44,7 +47,8 @@ public class EscribirFichero {
 		m.add(231);
 		int c = 80;
 		n.put(c, r); 
-		ReescribirFichero(n);
+		int a = 0;
+		ReescribirFichero(n,a);
 	}
 }
 
