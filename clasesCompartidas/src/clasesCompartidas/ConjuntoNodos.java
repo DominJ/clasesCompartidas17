@@ -61,7 +61,7 @@ public class ConjuntoNodos
 	}
 	
 	/*búsqueda binaria, nos sirve para saber si está o no el id en el conjunto de nodos.*/
-	private static int busqueda_binaria(int id_nodo)
+	private int busqueda_binaria(int id_nodo)
 	{
 		//acceder al nodo con un .getID() o algo así.
 		 int inicio = 0;
