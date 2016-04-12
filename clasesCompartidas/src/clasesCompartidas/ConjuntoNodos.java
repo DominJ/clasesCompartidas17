@@ -1,27 +1,28 @@
 package clasesCompartidas;
-import.java.util.Queue;
+
+import java.util.Queue;
 import java.util.ArrayList;
 
 public class ConjuntoNodos 
 {
 	private int ID_nodo_libre; //tengo que sacar este dato del fichero inicial.
 	private Queue<Integer> ID_nodos_vacios;
-	private List<Nodo> nodos;
-	//otro arraylist<String> solo con los nombres de los nodos.
-	private List<String> nombres_nodos;
+	private ArrayList<Nodo> nodos;
+	private ArrayList<String> nombres_nodos;
 	
 	
 	public ConjuntoNodos() //constructor por defecto
 	{
 		nodos = new ArrayList<Nodo>();
 		nombres_nodos = new ArrayList<String>();
+		//ID_nodos_vacios = new Queue<Integer>();
 	}
 	
 	public void anadir_nodo(Nodo nodo)
 	{
 		String nombre_nodo = nodo.consultar_nombre();
 		
-		if(existe_nodo(nombre_nodo)) //compruebas que no exista POR NOMBRE
+		if(existe_nodo(nombre_nodo) != -1) //compruebas que no exista POR NOMBRE
 		{
 			//no se puede añadir, se envia un mensaje diciendo que ya existe.
 			System.out.println("Ya existe un nodo con este nombre");
@@ -42,11 +43,11 @@ public class ConjuntoNodos
 	public void eliminar_nodo(Nodo nodo)
 	{
 		int id_nodo = nodo.consultar_id();
-		if(existe_nodo(id_nodo)
+		if(existe_nodo(id_nodo)!= -1)
 		{
 			nombres_nodos.remove(nodo.consultar_nombre());
 			nodos.remove(nodo);
-			liberar_nodo(id_nodo);
+			ID_nodos_vacios.add(id_nodo);
 		}
 		else
 		{
@@ -67,7 +68,7 @@ public class ConjuntoNodos
 		return posicion;
 	}
 	
-	private boolean existe_nodo(String nombre_nodo)
+	private int existe_nodo(String nombre_nodo)
 	{
 		int posicion = busqueda_binaria_nombre(nombre_nodo);
 		return posicion;//analogamente a su versión de enteros, pero ordenado por nombre.
@@ -79,12 +80,6 @@ public class ConjuntoNodos
 		 * return posicion de la cola;
 		 * else*/
 		return ID_nodo_libre; //pongo esto solo para que eclipse no me lance errores
-	}
-	
-	private void liberar_nodo(int id_nodo)
-	{
-		/*añadir el ID a la cola de disponibles
-		 * borrar nodo*/
 	}
 	
 	/*búsqueda binaria, nos sirve para saber si está o no el id en el conjunto de nodos.*/
@@ -112,8 +107,8 @@ public class ConjuntoNodos
 		while(inicio <= fin)
 		{
 		    posicion = (inicio+fin)/2;		    
-		    if(nombres_nodos.get(posicion).consultar_nombre() == nombre_nodo) return posicion; //"nodos.get(posicion)" equivale a "nodos[posicion]".
-		    else if(nombres_nodos.get(posicion).consultar_nombre() < nombre_nodo) inicio = posicion+1;
+		    if(nombres_nodos.get(posicion).equals(nombre_nodo)) return posicion; //"nodos.get(posicion)" equivale a "nodos[posicion]".
+		    else if(nombres_nodos.get(posicion).compareTo(nombre_nodo) < 0) inicio = posicion+1;
 		    else fin = posicion-1;     
 		}
 		return -1;
