@@ -11,19 +11,26 @@ public class Nodo
 		
 	}
 	
+	public Nodo(int id, String nombre, String tipo) // constructor por defecto
+	{
+		this.id = id;
+		this.nombre = nombre;
+		this.tipo = tipo;
+	}
+	
 	public void anadir_id(int i)
 	{
-		
+		this.id = i;
 	}
 	
 	public void anadir_nombre(String s)
 	{
-		
+		this.nombre = s;
 	}
 	
 	public void anadir_tipo(String t)
 	{
-		
+		this.tipo = t;
 	}
 	
 	public int consultar_id()
