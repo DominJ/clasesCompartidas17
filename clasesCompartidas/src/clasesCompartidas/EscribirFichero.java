@@ -1,4 +1,5 @@
-package test;
+package clasesCompartidas;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
@@ -13,9 +14,12 @@ public class EscribirFichero {
 	
 	//a == 1 és un fitxer on la primera en ordre és la clau i la segona les relacionades amb ella
 	//i si a == 0 és la inversa
-	public static void ReescribirFichero(HashMap<Integer,ArrayList<Integer>> n, Integer l){
+	public static void ReescribirFicheroRelaciones(HashMap<Integer,ArrayList<Integer>> n, int Tipus){
 		try{
-			FileWriter fw = new FileWriter("/Users/USUARIO/Downloads/PROP/DBLP_four_area/prova1.txt",false);
+			FileWriter fw;
+			if (Tipus == 0) fw = new FileWriter("/home2/users/alumnes/1193773/dades/DBLP_four_area/paper_author.txt",false);
+			else if (Tipus == 1) fw = new FileWriter("/home2/users/alumnes/1193773/dades/DBLP_four_area/paper_conf.txt",false);
+			else  fw = new FileWriter("/home2/users/alumnes/1193773/dades/DBLP_four_area/paper_term.txt",false);
 		    Iterator<Entry<Integer, ArrayList<Integer>>> it = n.entrySet().iterator();
 		    while (it.hasNext()) {
 				Map.Entry<Integer, ArrayList<Integer>> e = it.next();
@@ -23,8 +27,7 @@ public class EscribirFichero {
 				int a = e.getKey();
 				b = e.getValue();
 				for (int j = 0; j < b.size(); j++){
-					if(l == 1) fw.write(a + "\t"+ b.get(j) + "\r\n");
-					else fw.write(b.get(j) + "\t"+ a + "\r\n");
+					fw.write(a + "\t"+ b.get(j) + "\r\n");
 				}
 			}
 			fw.close();
@@ -33,22 +36,32 @@ public class EscribirFichero {
 		}
 	}
 	
+	public static void ReescribirFicheroNodos(HashMap<Integer,Nodo> n, int Tipus){
+		try{
+			FileWriter fw;
+			if (Tipus == 0) fw = new FileWriter("/home2/users/alumnes/1193773/dades/DBLP_four_area/paper.txt",false);
+			else if (Tipus == 1) fw = new FileWriter("/home2/users/alumnes/1193773/dades/DBLP_four_area/author.txt",false);
+			else if (Tipus == 2)  fw = new FileWriter("/home2/users/alumnes/1193773/dades/DBLP_four_area/conf.txt",false);
+			else fw = new FileWriter("/home2/users/alumnes/1193773/dades/DBLP_four_area/term.txt",false);
+		    Iterator<Entry<Integer,Nodo>> it = n.entrySet().iterator();
+		    while (it.hasNext()) {
+				Map.Entry<Integer, Nodo> e = it.next();
+				Nodo b = new Nodo();
+				int a = e.getKey();
+				b = e.getValue();
+				fw.write(a + "\t"+ b.consultar_nombre() + "\r\n");
+			}
+			fw.close();
+		}catch(IOException e){
+			System.out.println("Error de:"+e);
+		}
+	}
+	
+	
 	
 	public static void main(String[] args){
-		HashMap<Integer,ArrayList<Integer>> n = new HashMap<Integer,ArrayList<Integer>>();
-		ArrayList<Integer> r = new ArrayList<Integer>();
-		ArrayList<Integer> m = new ArrayList<Integer>();
-		r.add(234);
-		r.add(111);
-		r.add(892);
-		int s = 90;
-		n.put(s, r);
-		m.add(999);
-		m.add(231);
-		int c = 80;
-		n.put(c, r); 
-		int a = 0;
-		ReescribirFichero(n,a);
+		HashMap<Integer,ArrayList<Integer>> r = new HashMap<Integer,ArrayList<Integer>>();
+		ReescribirFicheroRelaciones(r,2);
 	}
 }
 
