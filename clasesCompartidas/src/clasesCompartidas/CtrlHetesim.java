@@ -66,7 +66,7 @@ public class CtrlHetesim
 				RRcol.add(RRval);
 				++etiqueta;
 			}
-			RR.put(id, Rcol);
+			RR.put(id, RRcol);
 		}
 		//Multiplicamos
 		M1=producto_mat(M1, RL);
