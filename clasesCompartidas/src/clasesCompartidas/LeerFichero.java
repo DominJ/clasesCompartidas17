@@ -10,7 +10,8 @@ import java.util.HashMap;
 
 
 
-public class LeerFichero {
+public class LeerFichero 
+{
 	
 	//Si tipusFitxer = 1, utilitzarem el tipusNode per saber la dada primitiva (0 = P, 1 = A, 2 = C, 3 = T)  
 	

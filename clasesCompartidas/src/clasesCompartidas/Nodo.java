@@ -11,6 +11,11 @@ public class Nodo
 		
 	}
 	
+	public Nodo(String nombre) // constructor 
+	{
+		this.nombre = nombre;
+	}
+	
 	public Nodo(int id, String nombre, String tipo) // constructor por defecto
 	{
 		this.id = id;
