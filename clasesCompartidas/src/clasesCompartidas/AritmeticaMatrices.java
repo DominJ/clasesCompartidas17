@@ -5,10 +5,10 @@ import Pair;
 
 public interface AritmeticaMatrices
 {
-	public HashMap<int,ArrayList<Pair<int,double>>> producto_mat(HashMap<int,ArrayList<Pair<int,double>>> a, HashMap<int,ArrayList<Pair<int,double>>> b);
+	public HashMap<Integer,ArrayList<Pair<Integer,Double>>> producto_mat(HashMap<Integer,ArrayList<Pair<Integer,Double>>> a, HashMap<Integer,ArrayList<Pair<Integer,Double>>> b);
 
-	public HashMap<int,ArrayList<Pair<int,double>>> producto_norm_mat(HashMap<int,ArrayList<Pair<int,double>>> a, HashMap<int,ArrayList<Pair<int,double>>> b);
+	public HashMap<Integer,ArrayList<Pair<Integer,Double>>> HashMap<Integer,ArrayList<Pair<Integer,Double>>> a, HashMap<Integer,ArrayList<Pair<Integer,Double>>> b);
 
-	public void Relación_Dummy(HashMap<int,ArrayList<Pair<int,double>>> M1, HashMap<int,ArrayList<Pair<int,double>>> M2, HashMap<int,ArrayList<pair<int,double>>> R);
+	public void Relación_Dummy(HashMap<Integer,ArrayList<Pair<Integer,Double>>> M1, HashMap<Integer,ArrayList<Pair<Integer,Double>>> M2, HashMap<Integer,ArrayList<Pair<Integer,Double>>> R);
 
 }
