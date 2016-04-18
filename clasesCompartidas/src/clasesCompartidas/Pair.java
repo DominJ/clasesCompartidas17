@@ -1,4 +1,4 @@
-package Pair;
+package clasesCompartidas;
 
 public class Pair<A, B> {
     private A first;
