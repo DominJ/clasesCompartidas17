@@ -31,7 +31,7 @@ public class Grafo
 		
 	}
 	
-	public void escribirRelaciones()
+	public HashMap<Integer,ArrayList<Pair<Integer,Double>>> getRelaciones(String R)
 	{
 		
 	}
