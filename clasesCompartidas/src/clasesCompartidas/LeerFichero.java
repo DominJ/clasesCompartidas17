@@ -65,7 +65,7 @@ public class LeerFichero
 
 	//IMPORTANTE, devolver un pair con dos hashmaps: HashMap<Integer,String>
 	// HashMap<String,Integer>
-	public static HashMap<Integer,String> crear_nodo_primitivo(int c) throws IOException {
+	public static pair<HashMap<Integer,String>,HashMap<String,Integer>> crear_nodo_primitivo(int c) throws IOException {
 		String cadena;
 		//Este metodo lee el archivo
 		String archivo = null;
@@ -76,6 +76,7 @@ public class LeerFichero
 		FileReader f = new FileReader(archivo); 
 		BufferedReader b = new BufferedReader(f); 
 		HashMap<Integer,String> m = new HashMap<Integer,String>();
+		HashMap<String,Integer> n = new HashMap<String,Integer>();
 		Integer codi = 0;
 		while(((cadena = b.readLine())!=null)){
 	    	int i = 0;
@@ -87,10 +88,14 @@ public class LeerFichero
 	    	codi = Integer.parseInt(s);
 	    	String s1 = copy.substring(i+1,copy.length());
 	    	m.put(codi, s1);
+	    	n.put(s1,codi);
 		}
 		//Cerramos el buffer
 		b.close();
-		return m;
+		pair<HashMap<Integer,String>,HashMap<String,Integer>> v = new pair<HashMap<Integer,String>,HashMap<String,Integer>>();
+		v.first = m;
+		v.second = n;
+		return v;
 	}
 
 	
