@@ -109,12 +109,16 @@ public class LeerFichero
 	
 	
 	public static void main(String [] args) throws IOException {
-		
+		pair<HashMap<Integer,String>,HashMap<String,Integer>> z = crear_nodo_primitivo(0);
 		//HashMap<Integer,ArrayList<Integer>> r = crear_relacion(1);
-		HashMap<Integer,String> s = crear_nodo_primitivo(0);
+		HashMap<Integer,String> s = z.first;
+		HashMap<String,Integer> s1 = z.second;
+
 		//ArrayList<Integer> m = new ArrayList<Integer>();
 		String m = s.get(7678);
-		System.out.println(m.consultar_nombre());
+		System.out.println(m + "\n");
+		Integer n = s1.get(m);
+		System.out.println(n + "\n");
 		//m = r.get(7632);
 		 /* for (Integer number : m) {
 			   System.out.println("Number0 = " + number.);
