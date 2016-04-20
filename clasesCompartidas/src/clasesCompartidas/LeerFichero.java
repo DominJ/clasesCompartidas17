@@ -16,6 +16,8 @@ public class LeerFichero
 	//Si tipusFitxer = 1, utilitzarem el tipusNode per saber la dada primitiva (0 = P, 1 = A, 2 = C, 3 = T)  
 	
 	//La string archivo hay que escribirla con las barras no invertidas, sino te salta error
+	//IMPORTANTE, devolver un pair con dos hashmaps: HashMap<Integer,ArrayList<Integer>>
+	// HashMap<Integer,ArrayList<Integer>>
 	public static HashMap<Integer,ArrayList<Integer>> crear_relacion(int c) throws IOException {
 		String cadena;
 		//Este metodo lee el archivo
@@ -61,6 +63,8 @@ public class LeerFichero
 		return m;
 	}
 
+	//IMPORTANTE, devolver un pair con dos hashmaps: HashMap<Integer,String>
+	// HashMap<String,Integer>
 	public static HashMap<Integer,Nodo> crear_nodo_primitivo(int c) throws IOException {
 		String cadena;
 		//Este metodo lee el archivo
