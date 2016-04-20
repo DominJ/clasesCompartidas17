@@ -65,7 +65,7 @@ public class LeerFichero
 
 	//IMPORTANTE, devolver un pair con dos hashmaps: HashMap<Integer,String>
 	// HashMap<String,Integer>
-	public static HashMap<Integer,Nodo> crear_nodo_primitivo(int c) throws IOException {
+	public static HashMap<Integer,String> crear_nodo_primitivo(int c) throws IOException {
 		String cadena;
 		//Este metodo lee el archivo
 		String archivo = null;
@@ -75,7 +75,7 @@ public class LeerFichero
 		else archivo = "/home2/users/alumnes/1193773/dades/DBLP_four_area/term.txt";
 		FileReader f = new FileReader(archivo); 
 		BufferedReader b = new BufferedReader(f); 
-		HashMap<Integer,Nodo> m = new HashMap<Integer,Nodo>();
+		HashMap<Integer,String> m = new HashMap<Integer,String>();
 		Integer codi = 0;
 		while(((cadena = b.readLine())!=null)){
 	    	int i = 0;
@@ -86,8 +86,7 @@ public class LeerFichero
 	    	String s = copy.substring(0,i);
 	    	codi = Integer.parseInt(s);
 	    	String s1 = copy.substring(i+1,copy.length());
-	    	Nodo q = new Nodo(s1);
-	    	m.put(codi, q);
+	    	m.put(codi, s1);
 		}
 		//Cerramos el buffer
 		b.close();
@@ -99,10 +98,9 @@ public class LeerFichero
 	public static void main(String [] args) throws IOException {
 		
 		//HashMap<Integer,ArrayList<Integer>> r = crear_relacion(1);
-		HashMap<Integer,Nodo> s = crear_nodo_primitivo(0);
+		HashMap<Integer,String> s = crear_nodo_primitivo(0);
 		//ArrayList<Integer> m = new ArrayList<Integer>();
-		Nodo m = new Nodo();
-		m = s.get(7678);
+		String m = s.get(7678);
 		System.out.println(m.consultar_nombre());
 		//m = r.get(7632);
 		 /* for (Integer number : m) {
