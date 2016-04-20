@@ -30,15 +30,25 @@ public class Relaciones
 	//PRE: i != NULL, i es un id de Paper
 	//POST: Devuelve ArrayList con los "Others" relacionados con el Paper con id = i
 	public ArrayList<Pair<Integer, Double>> consultar_RelacionPaper(Integer i) {
-		if (paperOther.containsKey(i)) return paperOther.get(i);
-		else return null;
+		try {
+			return paperOther.get(i);
+		}
+		catch (NullPointerException e) {
+			System.out.println("Caught NullPointerException: consultar_Relacion " + e.getMessage());
+			return null;
+		}
 	}
 	
 	//PRE: i != NULL, i es un id de Other
 	//POST: Devuelve ArrayList con los Papers relacionados con el Other con id = i
 	public ArrayList<Pair<Integer,Double>> consultar_RelacionOther(Integer i) {
-		if (paperOther.containsKey(i)) return otherPaper.get(i);
-		else return null;
+		try {
+			return otherPaper.get(i);
+		}
+		catch (NullPointerException e) {
+			System.out.println("Caught NullPointerException: consultar_Relacion " + e.getMessage());
+			return null;
+		} 
 	}
 	
 	//ANADIR
@@ -49,7 +59,7 @@ public class Relaciones
 			this.paperOther.put(a, new ArrayList<Pair<Integer,Double>>());
 		}
 		//Añadir ordenadamente
-		Pair<Integer,Double> p = new Pair(b,0.0);
+		Pair<Integer,Double> p = new Pair<Integer, Double>(b,1.0);
 		this.paperOther.get(a).add(p);
 		anadir_OtherPaper(b,a);
 	}
@@ -61,7 +71,7 @@ public class Relaciones
 		if (!this.otherPaper.containsKey(a)){ //si no existe, creamos entrada iniciando arrayList
 			this.otherPaper.put(b, new ArrayList<Pair<Integer,Double>>());
 		}
-		Pair<Integer,Double> p = new Pair(b,0.0);
+		Pair<Integer,Double> p = new Pair<Integer, Double>(b,1.0);
 		this.otherPaper.get(a).add(p);
 	}
 
@@ -90,6 +100,8 @@ public class Relaciones
 		}
 	}
 	
+	//PRE: datos != Null
+	//POST: Anade al parametro implicito todos los datos
 	public void volcar_datos(HashMap<Integer, ArrayList<Pair<Integer,Double>>> datos) {
 		
 		for(Entry<Integer, ArrayList<Pair<Integer, Double>>> entry : datos.entrySet()){
