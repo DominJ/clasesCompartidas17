@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 
+
 public class Relaciones 
 {
 	private HashMap<Integer, ArrayList<Pair<Integer,Double>>> paperOther;
@@ -24,6 +25,17 @@ public class Relaciones
 	
 	public HashMap<Integer, ArrayList<Pair<Integer,Double>>> consultar_OtherPaper() {
 		return otherPaper;
+	}
+	
+	//PRE: a -> id_Paper, b -> id_Other
+	public Boolean existe_relacion(int a, int b) {
+		if (!paperOther.containsKey(a))return false;
+		else {
+			for (int i = 0; i < paperOther.get(a).size(); ++i) {
+				if (paperOther.get(a).get(i).getFirst() == a) return true;
+			}
+			return false;
+		}
 	}
 	
 	//PRE: i != NULL, i es un id de Paper
