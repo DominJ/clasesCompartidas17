@@ -1,4 +1,9 @@
+package clasesCompartidas;
 
+import java.util.*;
+
+public class ConjuntoNodos 
+{
 	private int ID_libre; //tengo que sacar este dato del fichero inicial. //inicializar a 1 al comienzo.
 	private Map<Integer, String > nodos;
 	private Map<String, Integer> nombres_nodos;
@@ -75,6 +80,21 @@
 		return existe;
 	}
 
+	public boolean modificar_nodo(String nombre_nodo, String nuevo_nombre)
+	{	
+		boolean modificado = false;
+		int id = nombres_nodos.get(nombre_nodo);
+		if(id != null)//si existe
+		{
+			modificado = true;
+			nodos.remove(id);//borras el nodo para agregarlo con el nuevo nombre
+			nodos.put(id, nuevo_nombre);
+			nombres_nodos.remove(nombre_nodo);
+			nombres_nodos.put(nuevo_nombre, id);
+			
+		}
+		return modificado;
+	}
 	
 	/*PRE:Cierto*/
 	/*POST: Devuelve el id del nombre del nodo pasado por parámetro*/
@@ -101,3 +121,4 @@
 	{
 		return nodos;
 	}	
+}
