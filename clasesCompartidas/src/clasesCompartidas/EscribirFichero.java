@@ -36,20 +36,20 @@ public class EscribirFichero {
 		}
 	}
 	
-	public static void ReescribirFicheroNodos(HashMap<Integer,Nodo> n, int Tipus){
+	public static void ReescribirFicheroNodos(HashMap<Integer,String> n, int Tipus){
 		try{
 			FileWriter fw;
 			if (Tipus == 0) fw = new FileWriter("/home2/users/alumnes/1193773/dades/DBLP_four_area/paper.txt",false);
 			else if (Tipus == 1) fw = new FileWriter("/home2/users/alumnes/1193773/dades/DBLP_four_area/author.txt",false);
 			else if (Tipus == 2)  fw = new FileWriter("/home2/users/alumnes/1193773/dades/DBLP_four_area/conf.txt",false);
 			else fw = new FileWriter("/home2/users/alumnes/1193773/dades/DBLP_four_area/term.txt",false);
-		    Iterator<Entry<Integer,Nodo>> it = n.entrySet().iterator();
+		    Iterator<Entry<Integer,String>> it = n.entrySet().iterator();
 		    while (it.hasNext()) {
-				Map.Entry<Integer, Nodo> e = it.next();
-				Nodo b = new Nodo();
+				Map.Entry<Integer, String> e = it.next();
+				String b = new String();
 				int a = e.getKey();
 				b = e.getValue();
-				fw.write(a + "\t"+ b.consultar_nombre() + "\r\n");
+				fw.write(a + "\t"+ b + "\r\n");
 			}
 			fw.close();
 		}catch(IOException e){
