@@ -1,31 +1,36 @@
-package clasesCompartidas;
 
-import java.util.*;
-
-public class ConjuntoNodos 
-{
-	private int ID_libre; //tengo que sacar este dato del fichero inicial.
-	private Map<Integer, String> nodos;
-	private Map<String, Integer> nombres_nodos = new HashMap<String, Integer>();
+	private int ID_libre; //tengo que sacar este dato del fichero inicial. //inicializar a 1 al comienzo.
+	private Map<Integer, String > nodos;
+	private Map<String, Integer> nombres_nodos;
 	
-	/*PRE:*/
-	/*POST:*/
+	/*PRE: Cierto*/
+	/*POST: Se crea un conjunto de nodos vacío*/
 	public ConjuntoNodos() //constructor por defecto
 	{
 		nodos = new HashMap<Integer, String>();
 		nombres_nodos = new HashMap<String, Integer>();
+		ID_libre = 1;
 	}
 	
-	/*PRE:*/
-	/*POST:*/
+	/*PRE: los hashmaps no son vacíos e ID_libre es un número entero positivo.*/
+	/*POST: Se crea un conjunto de nodos con los valores de los atributos indicados por los parámetros.*/
+	public ConjuntoNodos(Hashmap<int, String> nodos, Hashmap<String, int> nombres_nodos, int ID_libre)
+	{
+		this.nodos = nodos;
+		this.nombres_nodos = nombres_nodos;
+		this.ID_libre = ID_libre;
+	}
+	
+	/*PRE: No existe ningun nodo con ese nombre en el grafo*/
+	/*POST: Se añade el nodo con el nombre pasado por parámetro al grafo*/
 	public void anadir_nodo(String nombre_nodo)
 	{
 		if(nombres_nodos.containsKey(nombre_nodo)) //compruebas que no exista POR NOMBRE
 		{
-			//no se puede añadir, se envia un mensaje diciendo que ya existe.
+			//no se puede aÃ±adir, se envia un mensaje diciendo que ya existe.
 			System.out.println("Ya existe un nodo con este nombre");
 		}
-		else //no existe,se añade.
+		else //no existe,se aÃ±ade.
 		{
 			int id = ID_libre;
 			++ID_libre;
@@ -35,8 +40,8 @@ public class ConjuntoNodos
 	}
 	
 	
-	/*PRE:*/
-	/*POST:*/
+	/*PRE: El nodo identificado por id existe previamente en el grafo*/
+	/*POST:El nodo identificado por id es eliminado del grafo*/
 	public void eliminar_nodo(int id)
 	{
 		if(nodos.containsKey(id))//si existe
@@ -46,48 +51,53 @@ public class ConjuntoNodos
 		}
 		else //no existe
 		{
-			System.out.println("No existe ningún nodo con este nombre.");
+			System.out.println("No existe ningÃºn nodo con este nombre.");
 		}
 
 	}
 
-	/*PRE:*/
-	/*POST:*/
-	private void fijar_id_libre(int id_libre)
-	{
-		this.ID_libre = id_libre;
-	}
 	
-	/*PRE:*/
-	/*POST:*/
-	public boolean existe_nombre_nodo(String nombre_nodo)
+	/*PRE:Cierto*/
+	/*POST: Devuelve true si existe un nodo con el nombre pasado por parámetro, false en caso contrario*/
+	public boolean existe_nodo(String nombre_nodo)
 	{
 		boolean existe = false;
 		if(nombres_nodos.get(nombre_nodo)!= null) existe = true;
 		return existe;
 	}
 	
-	/*PRE:*/
-	/*POST:*/
-	public void llenar_conjunto(int total, estructuradenodos)
+	/*PRE:Cierto */
+	/*POST:Devuelve true si existe un nodo con el id pasado por parámetro, false en caso contrario*/
+	public boolean existe_nodo(int id_nodo)
 	{
-		//presupongo que esa estructura estará ordenada
-		for(int i = 0; i < total-1; ++i)
-		{
-			anadir_nodo(loquetoque);
-		}
-		int id = iddelultimonodoaañadir;
-		fijar_id_libre(id);
-		anadir_nodo(ultimo);
-		//aqui añadimos también la última de todas, suponiendo que es la ID más alta de todas.
-		
-		
+		boolean existe = false;
+		if(nodos.get(id_nodo)!= null) existe = true;
+		return existe;
+	}
+
+	
+	/*PRE:Cierto*/
+	/*POST: Devuelve el id del nombre del nodo pasado por parámetro*/
+	public int consultar_nodo(String nombre_nodo)
+	{
+		int id = nombres_nodos.get(nombre_nodo);
+		return id;
 	}
 	
-	/*PRE:*/
-	/*POST:*/
-	public Map<Integer, String> devolver_conjunto()
+	/*PRE:Cierto*/
+	/*POST: Devuelve el nombre del id del nodo pasado por parámetro*/
+	public String consultar_nodo(int id_nodo)
+	{
+		String nombre = nodos.get(id_nodo);
+		return nombre;
+	}
+
+	
+	/*PRE:Cierto*/
+	/*POST: Devuelve el conjunto de nodos entero del parámetro implícito*/
+	/*Nota: Ésta función está pensada para pasar la información necesaria para poder guardar los datos en un fichero al final de la 
+	 * ejecución del programa.*/
+	public Hashmap<Integer, String> devolver_conjunto()
 	{
 		return nodos;
 	}	
-}
