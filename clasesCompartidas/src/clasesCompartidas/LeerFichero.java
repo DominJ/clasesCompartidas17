@@ -18,7 +18,7 @@ public class LeerFichero
 	//La string archivo hay que escribirla con las barras no invertidas, sino te salta error
 	//IMPORTANTE, devolver un pair con dos hashmaps: HashMap<Integer,ArrayList<Integer>>
 	// HashMap<Integer,ArrayList<Integer>>
-	public static HashMap<Integer,ArrayList<Integer>> crear_relacion(int c) throws IOException {
+	public static pair<HashMap<Integer,ArrayList<Integer>>,HashMap<Integer,ArrayList<Integer>>> crear_relacion(int c) throws IOException {
 		String cadena;
 		//Este metodo lee el archivo
 		String archivo = null;
@@ -28,6 +28,7 @@ public class LeerFichero
 		FileReader f = new FileReader(archivo); 
 		BufferedReader b = new BufferedReader(f); 
 		HashMap<Integer,ArrayList<Integer>> m = new HashMap<Integer,ArrayList<Integer>>();
+		HashMap<Integer,ArrayList<Integer>> n = new HashMap<Integer,ArrayList<Integer>>();
 		Integer codi,codi2,codi_antic;
 		codi = codi2 = codi_antic = 0;
 		Boolean primer = true;
@@ -44,6 +45,10 @@ public class LeerFichero
 	    	codi = Integer.parseInt(s);
 	    	String s1 = copy.substring(i+1,copy.length());
 	    	codi2 = Integer.parseInt(s1);
+	    	//Segon Hashmap del pair
+	    	if (n.get(codi2) == null) map.put(codi2, new ArrayList<Integer>());
+		n.get(codi2).add(codi);
+	    	//Primer Hashmap del pair
 	    	if(primer){
 	    		s2 = copy.substring(0,i);
 	    		codi_antic = codi;
@@ -60,7 +65,10 @@ public class LeerFichero
 		m.put(codi_antic, l);
 		//Cerramos el buffer
 		b.close();
-		return m;
+		pair<HashMap<Integer,ArrayList<Integer>>,HashMap<Integer,ArrayList<Integer>>> v = new pair<HashMap<Integer,ArrayList<Integer>>,HashMap<Integer,ArrayList<Integer>>>();
+		v.first = m;
+		v.second = n;
+		return v;
 	}
 
 	//IMPORTANTE, devolver un pair con dos hashmaps: HashMap<Integer,String>
