@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 
-
 public class Relaciones 
 {
 	private HashMap<Integer, ArrayList<Pair<Integer,Double>>> paperOther;
@@ -59,8 +58,7 @@ public class Relaciones
 			this.paperOther.put(a, new ArrayList<Pair<Integer,Double>>());
 		}
 		//Añadir ordenadamente
-		Pair<Integer,Double> p = new Pair<Integer, Double>(b,1.0);
-		this.paperOther.get(a).add(p);
+		paperOther.get(a).add(new Pair<Integer, Double>(b,1.0));
 		anadir_OtherPaper(b,a);
 	}
 
@@ -69,10 +67,9 @@ public class Relaciones
 	private void anadir_OtherPaper(int a, int b)
 	{
 		if (!this.otherPaper.containsKey(a)){ //si no existe, creamos entrada iniciando arrayList
-			this.otherPaper.put(b, new ArrayList<Pair<Integer,Double>>());
+			this.otherPaper.put(a,new ArrayList<Pair<Integer,Double>>());
 		}
-		Pair<Integer,Double> p = new Pair<Integer, Double>(b,1.0);
-		this.otherPaper.get(a).add(p);
+		otherPaper.get(a).add(new Pair<Integer, Double>(b,1.0));
 	}
 
   	//ELIMINAR
