@@ -80,18 +80,22 @@ public class ConjuntoNodos
 		return existe;
 	}
 
+	/*PRE: nuevo_nombre no existe previamente en el grafo, nombre_nodo existe previamente*/
+	/*POST: Se modifica el nombre del nodo con el nuevo nombre pasado por parámetro.*/
 	public boolean modificar_nodo(String nombre_nodo, String nuevo_nombre)
 	{	
 		boolean modificado = false;
 		int id = nombres_nodos.get(nombre_nodo);
 		if(id != null)//si existe
 		{
-			modificado = true;
-			nodos.remove(id);//borras el nodo para agregarlo con el nuevo nombre
-			nodos.put(id, nuevo_nombre);
-			nombres_nodos.remove(nombre_nodo);
-			nombres_nodos.put(nuevo_nombre, id);
-			
+			if(nombres_nodos.get(nuevo_nombre) == null) //si no existe.
+			{
+				modificado = true;
+				nodos.remove(id);//borras el nodo para agregarlo con el nuevo nombre
+				nodos.put(id, nuevo_nombre);
+				nombres_nodos.remove(nombre_nodo);
+				nombres_nodos.put(nuevo_nombre, id);
+			}
 		}
 		return modificado;
 	}
