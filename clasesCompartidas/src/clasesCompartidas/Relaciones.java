@@ -41,11 +41,11 @@ public class Relaciones
 	//PRE: i != NULL, i es un id de Paper
 	//POST: Devuelve ArrayList con los "Others" relacionados con el Paper con id = i
 	public ArrayList<Pair<Integer, Double>> consultar_RelacionPaper(Integer i) {
-		try {
+		if (paperOther.containsKey(i)) {
 			return paperOther.get(i);
 		}
-		catch (NullPointerException e) {
-			System.out.println("Caught NullPointerException: consultar_Relacion " + e.getMessage());
+		else {
+			System.out.println("Caught NullPointerException: consultar_Relacion");
 			return null;
 		}
 	}
@@ -89,10 +89,17 @@ public class Relaciones
 	public void eliminar_PaperOther(int a, int b)
 	{
 		if (this.paperOther.containsKey(a)){ //borramos relación
-			paperOther.get(a).remove(b);
-			if (this.paperOther.get(a).isEmpty()){ //si no quedan más relaciones, lo borramos todo
-				this.paperOther.remove(a);
+			int index = -1;
+			for (int i = 0; i < paperOther.get(a).size(); ++i){
+				if (b == paperOther.get(a).get(i).getFirst()) index = i;
 			}
+			if (index >= 0) {
+				paperOther.get(a).remove(index);
+				if (this.paperOther.get(a).isEmpty()){ //si no quedan más relaciones, lo borramos todo
+					this.paperOther.remove(a);
+				}
+			}
+			else System.out.println("No existe ninguna relacion");
 		}
 		eliminar_OtherPaper(b,a);
 	}
@@ -102,10 +109,17 @@ public class Relaciones
 	private void eliminar_OtherPaper(int a, int b)
 	{
 		if (this.otherPaper.containsKey(a)){ //borramos relación
-			otherPaper.get(a).remove(b);
-			if (this.otherPaper.get(a).isEmpty()){ //si no quedan más relaciones, lo borramos todo
-				this.otherPaper.remove(a);
+			int index = -1;
+			for (int i = 0; i < otherPaper.get(a).size(); ++i){
+				if (b == otherPaper.get(a).get(i).getFirst()) index = i;
 			}
+			if (index >= 0) {
+				otherPaper.get(a).remove(index);
+				if (this.otherPaper.get(a).isEmpty()){ //si no quedan más relaciones, lo borramos todo
+					this.otherPaper.remove(a);
+				}
+			}
+			else System.out.println("No existe ninguna relacion");
 		}
 	}
 	
