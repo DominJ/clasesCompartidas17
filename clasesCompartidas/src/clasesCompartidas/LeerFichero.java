@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class LeerFichero 
 {
 	
-	//Si tipusFitxer = 1, utilitzarem el tipusNode per saber la dada primitiva (0 = P, 1 = A, 2 = C, 3 = T)  
+	//C serveix per discriminar el tipus de relació amb paper, utilitzarem la c de la següent manera (1 = PA, 2 = PC, 3 = PT)  
 	
 	//Aquest mètode retorna un pair amb un HashMap original de relacions a la primera posició i un HashMap transposat a
 	// la segona posició de la relació de dos tipus de node
@@ -22,8 +22,8 @@ public class LeerFichero
 		//Aquest mètode llegeix el fitxer
 		String archivo = null;
 		if (c == 1) archivo = "/home2/users/alumnes/1193773/dades/DBLP_four_area/paper_author.txt";
-		if (c == 2) archivo = "/home2/users/alumnes/1193773/dades/DBLP_four_area/paper_conf.txt";
-		if (c == 3) archivo = "/home2/users/alumnes/1193773/dades/DBLP_four_area/paper_term.txt";
+		else if (c == 2) archivo = "/home2/users/alumnes/1193773/dades/DBLP_four_area/paper_conf.txt";
+		else archivo = "/home2/users/alumnes/1193773/dades/DBLP_four_area/paper_term.txt";
 		FileReader f = new FileReader(archivo); 
 		BufferedReader b = new BufferedReader(f); 
 		HashMap<Integer,ArrayList<Integer>> m = new HashMap<Integer,ArrayList<Integer>>();
