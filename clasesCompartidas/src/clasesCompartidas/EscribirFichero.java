@@ -8,12 +8,13 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-//Aquesta classe simplement li passes un HashMap<Integer,<ArrayList<Integer>>> i et reescriu el document
+//Aquesta classe simplement li passes un HashMap i et reescriu el document. Segons el HashMap que sigui te l'escriurà al document
+//que li pertoqui
 
 public class EscribirFichero {
 	
-	//a == 1 és un fitxer on la primera en ordre és la clau i la segona les relacionades amb ella
-	//i si a == 0 és la inversa
+	//Segons el valor del Tipus (0 = PA, 1 = PC, 2 = PT), l'escriurem a un o altre document
+	// La funció no retorna res i se li ha de passar un HashMap corresponent
 	public static void ReescribirFicheroRelaciones(HashMap<Integer,ArrayList<Integer>> n, int Tipus){
 		try{
 			FileWriter fw;
@@ -36,6 +37,8 @@ public class EscribirFichero {
 		}
 	}
 	
+	//Segons el valor del Tipus (0 = P, 1 = A, 2 = C, 3 = T), l'escriurem a un o altre document
+	// La funció no retorna res i se li ha de passar un HashMap corresponent
 	public static void ReescribirFicheroNodos(HashMap<Integer,String> n, int Tipus){
 		try{
 			FileWriter fw;
@@ -58,7 +61,7 @@ public class EscribirFichero {
 	}
 	
 	
-	
+	//El main és un mètode per fer proves
 	public static void main(String[] args){
 		HashMap<Integer,ArrayList<Integer>> r = new HashMap<Integer,ArrayList<Integer>>();
 		ReescribirFicheroRelaciones(r,2);
