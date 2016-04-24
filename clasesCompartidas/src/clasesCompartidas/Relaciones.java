@@ -32,7 +32,7 @@ public class Relaciones
 		if (!paperOther.containsKey(a))return false;
 		else {
 			for (int i = 0; i < paperOther.get(a).size(); ++i) {
-				if (paperOther.get(a).get(i).getFirst() == a) return true;
+				if (paperOther.get(a).get(i).getFirst() == b) return true;
 			}
 			return false;
 		}
