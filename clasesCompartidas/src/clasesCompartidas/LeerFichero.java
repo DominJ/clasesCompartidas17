@@ -7,23 +7,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-
-
+/**
+ * @author Daniel Pulido Sánchez-Carnerero
+ *
+ */
 public class LeerFichero 
 {
 	
-	//C serveix per discriminar el tipus de relació amb paper, utilitzarem la c de la següent manera (1 = PA, 2 = PC, 3 = PT)  
-	
-	//Aquest mètode retorna un pair amb un HashMap original de relacions a la primera posició i un HashMap transposat a
-	// la segona posició de la relació de dos tipus de node
+	/*PRE: c es un integer que discrimina el tipus*/
+	/*POST: Es crea un pair de dos HashMaps, amb la relacio P-NodePrimitiu al First i NodePrimitiu-P al Second*/
 	public static Pair<HashMap<Integer,ArrayList<Integer>>,HashMap<Integer,ArrayList<Integer>>> crear_relacion(int c) throws IOException {
 		String cadena;
-		//Aquest mètode llegeix el fitxer
+		//Aquest metode llegeix el fitxer
+		Integer vb = 0;
 		String archivo = null;
-		if (c == 1) archivo = "/home2/users/alumnes/1193773/dades/DBLP_four_area/paper_author.txt";
-		else if (c == 2) archivo = "/home2/users/alumnes/1193773/dades/DBLP_four_area/paper_conf.txt";
-		else archivo = "/home2/users/alumnes/1193773/dades/DBLP_four_area/paper_term.txt";
+		if (c == 1) archivo = "Set1/paper_author.txt";
+		else if (c == 2) archivo = "Set1/paper_conf.txt";
+		else archivo = "Set1/paper_term.txt";
 		FileReader f = new FileReader(archivo); 
 		BufferedReader b = new BufferedReader(f); 
 		HashMap<Integer,ArrayList<Integer>> m = new HashMap<Integer,ArrayList<Integer>>();
@@ -34,12 +34,12 @@ public class LeerFichero
 		String s2 = new String();
 		ArrayList<Integer> l = new ArrayList<Integer>();
 		while(((cadena = b.readLine())!=null)){
+			++vb;
 	    	int i = 0;
 	    	String copy = cadena;
 	    	while(!(Character.isWhitespace(cadena.charAt(i)))) {
 	    		++i;
 	    	}
-	    	
 	    	String s = copy.substring(0,i);
 	    	codi = Integer.parseInt(s);
 	    	String s1 = copy.substring(i+1,copy.length());
@@ -71,16 +71,18 @@ public class LeerFichero
 		return v;
 	}
 
-	//Aquest mètode retorna un pair amb un HashMap original de node primitiu a la primera posició i un HashMap transposat a
-	// la segona posició. Els codis dels tipus són (0 = P, 1 = A, 2 = C, 3 = T) 
+	//Aquest mÃƒÂ¨tode retorna un pair amb un HashMap original de node primitiu a la primera posiciÃƒÂ³ i un HashMap transposat a
+	// la segona posiciÃƒÂ³. Els codis dels tipus sÃƒÂ³n (0 = P, 1 = A, 2 = C, 3 = T) 
+	/*PRE: c es un integer que discrimina el tipus*/
+	/*POST: Es crea un pair de dos HashMaps, amb la relacio dels dos atributs del NodePrimitiu*/
 	public static Pair<HashMap<Integer,String>,HashMap<String,Integer>> crear_nodo_primitivo(int c) throws IOException {
 		String cadena;
-		//Aquest mètode llegeix el fitxer
+		//Aquest mÃƒÂ¨tode llegeix el fitxer
 		String archivo = null;
-		if (c == 0) archivo = "C:/Users/USUARIO/Downloads/PROP/DBLP_four_area/paper.txt";
-		else if (c == 1) archivo = "C:/Users/USUARIO/Downloads/PROP/DBLP_four_area/author.txt";
-		else if (c == 2) archivo = "C:/Users/USUARIO/Downloads/PROP/DBLP_four_area/conf.txt";
-		else archivo = "C:/Users/USUARIO/Downloads/PROP/DBLP_four_area/term.txt";
+		if (c == 0) archivo = "Set1/paper.txt";
+		else if (c == 1) archivo = "Set1/author.txt";
+		else if (c == 2) archivo = "Set1/conf.txt";
+		else archivo = "Set1/term.txt";
 		FileReader f = new FileReader(archivo); 
 		BufferedReader b = new BufferedReader(f); 
 		HashMap<Integer,String> m = new HashMap<Integer,String>();
@@ -95,9 +97,9 @@ public class LeerFichero
 	    	String s = copy.substring(0,i);
 	    	codi = Integer.parseInt(s);
 	    	String s1 = copy.substring(i+1,copy.length());
-	    	//Introduïm els elements al HashMap primer
+	    	//IntroduÃƒÂ¯m els elements al HashMap primer
 	    	m.put(codi, s1);
-	        //Introduïm els elements al HashMap segon ja invertits
+	        //IntroduÃƒÂ¯m els elements al HashMap segon ja invertits
 	    	n.put(s1,codi);
 		}
 		//Tanquem el buffer
@@ -108,25 +110,15 @@ public class LeerFichero
 		v.setSecond(n);
 		return v;
 	}
-
 	
-	// Aquest mètode únicament és de prova 
-	public static void main(String [] args) throws IOException {
-		Pair<HashMap<Integer,String>,HashMap<String,Integer>> z = crear_nodo_primitivo(1);
-		//HashMap<Integer,ArrayList<Integer>> r = crear_relacion(1);
-		HashMap<Integer,String> s = z.getFirst();
-		HashMap<String,Integer> s1 = z.getSecond();
-
-		//ArrayList<Integer> m = new ArrayList<Integer>();
-		String m = s.get(76);
-		System.out.println("Author " + m + "\t");
-		Integer n = s1.get(m);
-		System.out.println("ID " + n + "\n");
-		//m = r.get(7632);
-		 /* for (Integer number : m) {
-			   System.out.println("Number0 = " + number.);
-		} */
-		   
+	/*PRE: Existeix el Hashmap que li passem*/
+	/*POST: Et retorna l'id més gran disponible*/
+	public static int idMax(HashMap<Integer,String> a)
+	{
+		int idMax = -1;
+		for(int i: a.keySet() ){
+			if(i > idMax)idMax = i;
+		}
+		return idMax;
 	}
-
 }
